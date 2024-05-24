@@ -37,15 +37,7 @@ namespace SolutionCenter.Extensions
 		}
         public static IServiceCollection AddSolutionCenterServices(this IServiceCollection services)
         {
-
-            //services.AddIdentity<Application, IdentityRole>(options =>
-            //{
-            //    options.User.RequireUniqueEmail = true;
-            //    options.Password.RequireUppercase = true;
-            //    options.Password.RequireLowercase = true;
-            //    options.Password.RequireDigit = true;
-            //    options.Password.RequiredLength = 8;
-            //}).AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+ 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = true;

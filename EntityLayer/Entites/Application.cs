@@ -15,7 +15,7 @@ namespace EntityLayer.Entites
         public int? Experience { get; set; }
         public byte[]? CV { get; set; }
         public string? Degree { get; set; }
-        public ApplicationStatus ApplicationStatus { get; set; } = ApplicationStatus.Waiting;
+        public ApplicationStatus ApplicationStatus { get; set; } = ApplicationStatus.Pending;
         public string? AppUserId { get; set; }
         public AppUser? AppUser { get; set; }
 

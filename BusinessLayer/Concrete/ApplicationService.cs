@@ -42,11 +42,11 @@ namespace BusinessLayer.Concrete
 
 		public List<Application> GetRefusal()
 		{
-			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Denied).ToList();
+			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Rejected).ToList();
 		}
 		public List<Application> GetWaiting()
 		{
-			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Waiting).ToList();
+			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Pending).ToList();
 		}
 
 		public void TUpdate(Application entity)

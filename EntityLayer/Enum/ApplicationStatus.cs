@@ -8,8 +8,8 @@ namespace EntityLayer.Enum
 {
 	public enum ApplicationStatus
 	{
-		Waiting,
+		Pending,
 		Approved,
-		Denied
+		Rejected
 	}
 }

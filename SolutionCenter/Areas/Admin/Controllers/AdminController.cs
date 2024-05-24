@@ -36,7 +36,7 @@ namespace SolutionCenter.Areas.Admin.Controllers
         public IActionResult UpdateRefusalStatus(Guid id)
         {
             var application = _applicationService.TGetByID(id);
-            application.ApplicationStatus = ApplicationStatus.Denied;
+            application.ApplicationStatus = ApplicationStatus.Rejected;
             _applicationService.TUpdate(application);
             return Ok(application);
         }

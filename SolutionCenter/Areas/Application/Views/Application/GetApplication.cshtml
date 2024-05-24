@@ -1,4 +1,40 @@
 ﻿<div class="col py-3">
 	@Html.Partial("_ApplicationNavBar")
 
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    @foreach (var item in ViewBag.Application)
+    {
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <div style="position: absolute; top: 0; right: 0;">
+
+                    @if (item.ApplicationStatus == 0)
+                    {
+                        <b style="color:orange">@item.ApplicationStatus</b>
+                    }
+                    else if (item.ApplicationStatus == 1)
+                    {
+                        <b style="color:cyan">@item.ApplicationStatus</b>
+                    }
+                    else if (item.ApplicationStatus == 2)
+                    {
+                        <b style="color:green">@item.ApplicationStatus</b>
+                    }
+                    else
+                    {
+                        <h1>HATA!</h1>
+                    }
+                </div>
+                <p class="card-text">İsim Soyisim: @item.Name @item.Surname</p>
+                <p class="card-text">Lisans: @item.Degree</p
+                <br />
+                <p class="card-text">Tecrübe Yılı: @item.Experience</p>
+
+
+            </div>
+        </div>
+        <br />
+    }
 </div>
