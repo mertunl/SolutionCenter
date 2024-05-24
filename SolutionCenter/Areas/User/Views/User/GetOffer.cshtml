@@ -1,0 +1,99 @@
+﻿@{    
+    var userPosts = ViewBag.UserPosts as List<EntityLayer.ViewModels.UserPostViewModel>;
+}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+
+        <div class="col py-3">
+            @if (ViewBag.userPosts.Count == 0)
+            {
+                <p>Gelen Teklif Yoktur.</p>
+            }
+            else
+            {
+                @if (userPosts != null && userPosts.Any())
+                {
+                    @foreach (var post in userPosts)
+                    {
+                        <div class="card">
+                            <h5 class="card-header">
+                                @post.Title
+                            </h5>
+                            <div class="card-body">
+                                @post.Content
+                            </div>
+                            <form method="post">
+                                <div class="card-footer">
+                                    <p>Teklif Sahibi: <b>@post.Price$</b></p>
+                                    <p style="color:red">
+                                        Teklif Sahibi: @post.Name
+                                        <button asp-area="Offer" asp-controller="Offer" asp-action="AcceptOffer" asp-route-id="@post.OfferID" class="btn-success" style="float:right">Kabul Et</button>
+                                        <button asp-area="Offer" asp-controller="Offer" asp-action="DeleteOffer" asp-route-id="@post.OfferID" class="btn-danger" style="float:right; margin-right: 5px;">Reddet</button>
+                                    </p>
+                                </div>
+                            </form>                  
+                        </div>
+                        <br />
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+
+
+@* @{
+    ViewData["Title"] = "GetOffer";
+    var userPosts = ViewBag.UserPosts as List<Post>;
+} *@
+
+@* <div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+        
+
+         
+        <div class="col py-3">
+            @if (ViewBag.userPosts.Count == 0)
+            {
+                <p>Gelen Teklif Yoktur.</p>
+            }
+            else
+            {
+            @if (userPosts != null && userPosts.Any())
+            {
+                @foreach (var post in userPosts)
+                {
+            <div class="card">
+                <h5 class="card-header">
+                    @post.Title
+
+                </h5>
+                <div class="card-body">
+                            @foreach (var offer in post.Offers)
+                            {
+                                <li>Teklif Fiyatı: @offer.Price</li>
+                            }
+                </div>
+            </div>
+                    }
+                    }
+
+            
+            
+            @if (ViewBag.offer.Count == 0)
+            {
+                <p>Gelen Teklif Yoktur.</p>
+            }
+            else
+            {
+            
+           
+                
+            }
+            
+        </div>
+    </div>
+</div> *@

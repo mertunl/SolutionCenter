@@ -1,0 +1,37 @@
+﻿@using EntityLayer.Entites
+@using Microsoft.AspNetCore.Identity
+
+	@inject UserManager<AppUser> UserManager
+
+@model Post
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<form method="post">
+<div class="mb-3">
+	<label for="exampleFormControlInput1" class="form-label">Konu Başlığı</label>
+	<input type="text" class="form-control" id="tittle" asp-for="Title">
+</div>
+<div class="mb-3">
+	<label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
+		<input type="hidden" value="@UserManager.GetUserId(User)" asp-for="AppUserId">
+		
+	<input type="text" class="form-control" id="tittle2" asp-for="Content">
+</div>
+	<div class="input-group mb-3">
+		<span class="input-group-text">$</span>
+		<input type="text" class="form-control" asp-for="Price">
+		<span class="input-group-text">.00</span>
+	</div>
+<div class="mb-3">
+		<label class="form-check-label">Kategori</label>
+		<div class="mb-3">
+		<select asp-for="CategoryIDs" multiple>
+			@foreach(var item in ViewBag.category)
+			{
+				<option value="@item.CategoryID">@item.Name</option>
+			}
+		</select>
+		</div>	
+</div>
+	<button class="btn btn-info">Yayınla</button>
+</form>

@@ -1,0 +1,69 @@
+﻿@using EntityLayer.Entites
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+@model Offer
+@{
+    ViewData["Title"] = "GetPost";
+    ViewData["Title"] = "GetUser";
+}
+
+<div class="container">
+    <div class="mb-3">
+        <b class="text-danger">
+            @ViewBag.post.Title
+        </b>
+
+    </div>
+    <div class="mb-3">
+        <p>
+            @ViewBag.post.Content
+        </p>
+    </div>
+    <div class="mb-3">
+        <p>
+            Ortalama Fiyat :  @ViewBag.post.Price
+        </p>
+        @foreach (var item in ViewBag.user)
+        {
+            <p>Gönderi Sahibi: @item.Name @item.Surname</p>
+        }
+
+        @* <p>
+        Ortalama Fiyat :  @ViewBag.user
+        </p> *@
+
+    </div>
+    <div class="mb-3">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Teklif Gönder
+        </button>
+
+        <!-- Modal -->
+        <form method="post">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Teklif Yap</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" value="@ViewBag.post.PostID" asp-for="PostID">
+                            <input type="hidden" value="@UserManager.GetUserId(User)" asp-for="AppUserId">
+                            <input type="number" class="form-control" asp-for="Price">
+                            <input type="hidden" value="@ViewBag.post.AppUserId" asp-for="Offeree">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            @* <button asp-action="CreateOffer" asp-controller="Offer" type="button" class="btn btn-primary">Teklifi Gönder</button> *@
+                            <button asp-area="Offer" asp-controller="Offer" asp-action="CreateOffer" class="btn btn-info">Teklifi Gönder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

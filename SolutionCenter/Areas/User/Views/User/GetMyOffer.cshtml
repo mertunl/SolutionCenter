@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "GetOffer";
+    var userPosts = ViewBag.UserPosts as List<EntityLayer.ViewModels.UserPostViewModel>;
+}
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+
+        <div class="col py-3">
+            @if (ViewBag.userPosts.Count == 0)
+            {
+                <p>Gönderilen Teklif Yoktur.</p>
+            }
+            else
+            {
+                @if (userPosts != null && userPosts.Any())
+                {
+                    @foreach (var post in userPosts)
+                    {
+                        <div class="card">
+                            <h5 class="card-header">
+                                @post.Title
+                               
+                                @if (post.OfferStatus == OfferStatus.Pending)
+                                {
+                                    <p style="float:right;color:orange">@post.OfferStatus</p>
+                                }
+                                else if (post.OfferStatus == OfferStatus.Rejected)
+                                {
+                                    <p style="float:right;color:red">@post.OfferStatus</p>
+                                }
+                                else if (post.OfferStatus == OfferStatus.Approved)
+                                {
+                                    <p style="float:right;color:green">@post.OfferStatus</p>
+                                }
+                                else
+                                {
+                                    <h1>HATA!</h1>
+                                }
+                              
+                            </h5>
+                            <div class="card-body">
+                                  @post.Content
+                            </div>
+                            <div class="card-footer">
+                                <p>Gönderilen Teklif: <b>@post.Price$</b> </p>
+                                <p style="color:red">Gönderi Sahibi: @post.Name </p>
+
+                                
+                                </div>
+                        </div>
+                        <br />
+                    }
+                }
+                
+            }
+        </div>
+    </div>
+</div>

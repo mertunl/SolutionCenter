@@ -1,0 +1,46 @@
+﻿@{
+    var userPosts = ViewBag.UserPosts as List<EntityLayer.ViewModels.UserPostViewModel>;
+}
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+
+        <div class="col py-3">
+
+            @Html.Partial("OfferNavBar")
+            @if (ViewBag.UserPosts.Count == 0)
+            {
+                <p>Onaylanan Teklif Yoktur.</p>
+            }
+            else
+            {
+                @if (userPosts != null && userPosts.Any())
+                {
+                    @foreach (var post in userPosts)
+                    {
+                        <div class="card">
+                            <h5 class="card-header">
+                                @post.Title
+
+                                <p style="float:right;color:green">@post.OfferStatus</p>
+
+
+                            </h5>
+                            <div class="card-body">
+                                @post.Content
+                            </div>
+                            <div class="card-footer">
+                                <p>Gönderilen Teklif: <b>@post.Price$</b> </p>
+                                <p style="color:red">Gönderi Sahibi: @post.Name </p>
+
+
+                            </div>
+                        </div>
+                        <br />
+                    }
+                }
+
+            }
+        </div>
+    </div>
+</div>

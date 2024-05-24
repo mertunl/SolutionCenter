@@ -1,0 +1,45 @@
+﻿@* <div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+
+        <div class="col py-3">
+            @foreach (var item in ViewBag.UserPost)
+            {
+                <p>Sorularım: @item.Title</p>
+            }
+        </div>
+</div>
+</div> *@
+
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftMenu")
+
+        <div class="col py-3">
+            <h3>Yayındakiler</h3>
+
+            @foreach (var item in ViewBag.UserPost)
+            {
+                <div class="card" style="width: 50rem;">
+                    <div class="card-body">
+
+                        <p class="card-title"></p>
+                        <a class="card-title" href="GetAboutPost/@item.PostID">@item.Title</a>
+
+                        <p class="card-text">@item.Content</p>
+
+                        <br />
+                        <p class="card-footer">@item.Price $</p>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

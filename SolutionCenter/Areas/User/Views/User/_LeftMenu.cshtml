@@ -1,0 +1,39 @@
+﻿@* <div class="container-fluid">
+    <div class="row flex-nowrap"> *@
+@{
+    
+}
+        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-3 bg-white min-vh-100" style=" margin-top: 10%">
+<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+    <li class="nav-item">
+        <a asp-area="User" asp-controller="User" asp-action="GetStat" class="nav-link align-middle px-0">
+            <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
+        </a>
+    </li>
+    <li>
+        <a asp-area="User" asp-controller="User" asp-action="GetPost" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi bi-file-earmark-post"></i> <span class="ms-1 d-none d-sm-inline">Yayınladıklarım</span>
+        </a>
+    </li>
+
+    <li>
+            <a asp-area="User" asp-controller="User" asp-action="GetOffer" class="nav-link px-0 align-middle">
+            <i class="fs-4 bi bi-currency-exchange"></i> <span class="ms-1 d-none d-sm-inline">Gelen Teklifler</span>
+        </a>
+    </li>
+        <li>
+            <a asp-area="User" asp-controller="User" asp-action="GetMyOffer" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi bi-currency-exchange"></i> <span class="ms-1 d-none d-sm-inline">Gönderilen Teklifler</span>
+            </a>
+        </li>
+
+        <li>
+            <a asp-area="User" asp-controller="User" asp-action="GetMyAcceptOffer" class="nav-link px-0 align-middle">
+                <i class="fs-4 bi bi-currency-exchange"></i> <span class="ms-1 d-none d-sm-inline">Teklif Ayrıntıları</span>
+            </a>
+        </li>
+        
+</ul>
+</div>
+@* </div>
+</div> *@

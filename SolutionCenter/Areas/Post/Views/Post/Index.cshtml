@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetUser";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<h3>Sorular</h3>
+
+@foreach (var item in ViewBag.posts) {
+    <div class="card" style="width: 50rem;">
+        <div class="card-body">
+            <div style="position: absolute; top: 0; right: 0;">
+                
+                @if (item.postStatus == 0)
+                {
+                    <b style="color:orange">@item.postStatus</b>
+                }
+                else if (item.postStatus == 1)
+                {
+                    <b style="color:cyan">@item.postStatus</b>
+                }
+                else if (item.postStatus == 2)
+                {
+                    <b style="color:green">@item.postStatus</b>
+                }
+                else
+                {
+                    <h1>HATA!</h1>
+                }               
+            </div>       
+            <p class="card-title"></p>
+            <a class="card-title" href="Post/GetPost/@item.PostID">@item.Title</a>
+
+            <p class="card-text">@item.Content</p>
+
+            
+
+            @* @foreach (var user in ViewBag.users)
+            {
+                if (user.Id == item.AppUserId)
+                {
+                    <p class="card-text">@user.Name @user.Surname</p>
+                }
+            } *@
+            @* @{
+                var user = ViewBag.users.ContainsKey(item.AppUserId) ? ViewBag.users[item.AppUserId] as EntityLayer.Entites.AppUser : null;
+            }
+            @if (user != null)
+            {
+                <p class="card-text">@user.Name @user.Surname</p>
+            } *@
+            
+            <br />
+            <p class="card-footer">@item.Price $</p>
+            
+           
+        </div>
+    </div>
+}
