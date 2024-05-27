@@ -14,9 +14,22 @@ namespace BusinessLayer.Concrete
 	{
 		private readonly IApplicationDAL _applicationDAL = applicationDAL;
 
-		
+        public List<Application> GetApprovedApplication()
+        {
+            return _applicationDAL.GetAll().Where(a => a.ApplicationStatus == ApplicationStatus.Approved).ToList();
+        }
 
-		public Application TAdd(Application entity)
+        public List<Application> GetPendingApplication()
+        {
+			return _applicationDAL.GetAll().Where(a=>a.ApplicationStatus == ApplicationStatus.Pending).ToList();
+        }
+
+        public List<Application> GetRejectedApplication()
+        {
+            return _applicationDAL.GetAll().Where(a => a.ApplicationStatus == ApplicationStatus.Rejected).ToList();
+        }
+
+        public Application TAdd(Application entity)
 		{
 			return _applicationDAL.Add(entity);
 		}
@@ -34,19 +47,6 @@ namespace BusinessLayer.Concrete
 		public List<Application> TGetListAll()
 		{
 			return _applicationDAL.GetAll();
-		}
-		public List<Application> GetAccept()
-		{
-			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus == ApplicationStatus.Approved).ToList();
-		}
-
-		public List<Application> GetRefusal()
-		{
-			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Rejected).ToList();
-		}
-		public List<Application> GetWaiting()
-		{
-			return _applicationDAL.GetAll().Where(x=>x.ApplicationStatus==ApplicationStatus.Pending).ToList();
 		}
 
 		public void TUpdate(Application entity)

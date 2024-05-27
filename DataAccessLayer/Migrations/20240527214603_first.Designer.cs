@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240523201554_first")]
+    [Migration("20240527214603_first")]
     partial class first
     {
         /// <inheritdoc />

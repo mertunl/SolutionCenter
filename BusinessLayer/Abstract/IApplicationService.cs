@@ -11,8 +11,8 @@ namespace BusinessLayer.Abstract
 
 	public interface IApplicationService:IGenericService<Application>
 	{
-		List<Application> GetAccept();
-		List<Application> GetRefusal();
-		List<Application> GetWaiting();
-	}
+		List<Application> GetPendingApplication();
+        List<Application> GetApprovedApplication();
+        List<Application> GetRejectedApplication();
+    }
 }

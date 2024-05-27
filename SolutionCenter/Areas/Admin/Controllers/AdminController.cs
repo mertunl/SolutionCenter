@@ -17,6 +17,19 @@ namespace SolutionCenter.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            var PendingApplicationCount = _applicationService.GetPendingApplication().Count();
+            var ApprovedApplicationCount = _applicationService.GetApprovedApplication().Count();
+            var RejectedApplicationCount = _applicationService.GetRejectedApplication().Count();
+            ViewBag.PendingApplicationCount = PendingApplicationCount;
+            ViewBag.ApprovedApplicationCount = ApprovedApplicationCount;
+            ViewBag.RejectedApplicationCount = RejectedApplicationCount;
+            return View();
+        }
+
+        public IActionResult GetPendingApplication()
+        {
+            var GetApplication = _applicationService.GetPendingApplication();
+            ViewBag.PendingApplication = GetApplication;
             return View();
         }
 
@@ -24,36 +37,8 @@ namespace SolutionCenter.Areas.Admin.Controllers
         {
             return Ok(_applicationService.TGetListAll());
         }
-        [HttpPatch]
-        public IActionResult UpdateApprovalStatus(Guid id)
-        {
-            var application = _applicationService.TGetByID(id);
-            application.ApplicationStatus = ApplicationStatus.Approved;
-            _applicationService.TUpdate(application);
-            return Ok(application);
-        }
-        [HttpPatch]
-        public IActionResult UpdateRefusalStatus(Guid id)
-        {
-            var application = _applicationService.TGetByID(id);
-            application.ApplicationStatus = ApplicationStatus.Rejected;
-            _applicationService.TUpdate(application);
-            return Ok(application);
-        }
-        public IActionResult GetAcceptStatus()
-        {
-            var acceptApp = _applicationService.GetAccept();
-            return Ok(acceptApp);
-        }
-        public IActionResult GetRefusalStatus()
-        {
-            var refusalApp = _applicationService.GetRefusal();
-            return Ok(refusalApp);
-        }
-        public IActionResult GetWaitingStatus()
-        {
-            var waitingApp = _applicationService.GetWaiting();
-            return Ok(waitingApp);
-        }
+        
+
+       
     }
 }
