@@ -37,8 +37,24 @@ namespace SolutionCenter.Areas.Admin.Controllers
         {
             return Ok(_applicationService.TGetListAll());
         }
-        
+        [HttpPost]        
+        public IActionResult AcceptApplication(Guid id)
+        {
+            var getApplication = _applicationService.TGetByID(id);
+            getApplication.ApplicationStatus = ApplicationStatus.Approved;
+            _applicationService.TUpdate(getApplication);
+            return RedirectToAction("GetPendingApplication", "Admin", new { area = "Admin" });
 
-       
+        }
+        [HttpPost]
+        public IActionResult RejectApplication(Guid id)
+        {
+            var getApplication = _applicationService.TGetByID(id);
+            getApplication.ApplicationStatus = ApplicationStatus.Rejected;
+            _applicationService.TUpdate(getApplication);
+            return RedirectToAction("GetPendingApplication", "Admin", new { area = "Admin" });
+
+        }
+
     }
 }
