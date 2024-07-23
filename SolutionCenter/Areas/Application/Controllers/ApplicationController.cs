@@ -10,7 +10,7 @@ namespace SolutionCenter.Areas.Application.Controllers
     {
         private readonly IApplicationService applicationService;
         private readonly UserManager<AppUser> userManager;
-        public ApplicationController(IApplicationService applicationService, UserManager<EntityLayer.Entites.AppUser> userManager)
+        public ApplicationController(IApplicationService applicationService, UserManager<AppUser> userManager)
         {
             this.applicationService = applicationService;
             this.userManager = userManager;
@@ -25,8 +25,12 @@ namespace SolutionCenter.Areas.Application.Controllers
         }
 
         [HttpPost]
-		public IActionResult CreateApplication(EntityLayer.Entites.Application application)
+		public async Task<IActionResult> CreateApplication(EntityLayer.Entites.Application application)
 		{
+            var user = await userManager.GetUserAsync(User);
+            application.Name = user.Name;
+            application.Surname = user.Surname;
+            application.AppUserId = userManager.GetUserId(User);
             applicationService.TAdd(application);
 			return RedirectToAction("CreateApplication");
 		}
@@ -38,6 +42,7 @@ namespace SolutionCenter.Areas.Application.Controllers
             ViewBag.Application = getApplication;
             return View();
         }
+
 
 	}
 }

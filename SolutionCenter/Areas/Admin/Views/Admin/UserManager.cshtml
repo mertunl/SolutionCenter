@@ -1,0 +1,113 @@
+﻿@{
+    Layout = null;
+    int count = 0;
+    
+}
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/SolutionCenter.styles.css" asp-append-version="true" />
+
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftBarMenu")
+        <div class="col py-3">
+            @* <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid">
+                    <form class="d-flex" method="get" asp-area="Admin" asp-controller="Admin" asp-action="UserManagerSearch">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav> *@
+            <form method="post" class="">
+
+            </form>
+            <form method="get" asp-area="Admin" asp-controller="Admin" asp-action="UserManager">
+
+                <select id="roleFilter" class="form-select" name="role">
+                    <option selected value="">Tüm Kullanıcılar</option>
+                    <option value="SuperUser">SuperUser Kullanıcılar</option>
+                    <option value="User">User Kullanıcılar</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Filtrele</button>
+            </form>
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        @* <th scope="col">#</th> *@
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @ViewBag.User)
+                    {
+                       
+                        <tr>
+                            @* <th scope="row">@item.Id</th> *@
+                            <td>@item.Name</td>
+                            <td>@string.Join(", ", item.Roles)</td>
+                            <td><button type="button" class="btn-outline-success" data-bs-toggle="modal" data-bs-target="#modal-@item.Id">Düzenle</button></td>
+                        </tr>
+                   
+
+                           
+                                <div id="modal-@item.Id" class="modal fade" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <form method="post" asp-area="Admin" asp-controller="Admin" asp-action="ChangeUserRole">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="reviewModalLabel">@item.Name Profili</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                
+                                               
+                                                        <input type="hidden" name="userId" value="@item.Id" />
+                                                        <input type="radio" name="roleName" value="User" @(item.Roles.Contains("User") ? "checked" : "")> User<br>
+                                                        <input type="radio" name="roleName" value="SuperUser" @(item.Roles.Contains("SuperUser") ? "checked" : "")> SuperUser<br>
+                                   
+                                            
+                                             </div>
+                                            
+                                            <div class="modal-footer">
+                                                <div class="mb-3">
+                                                         <button type="submit" class="btn btn-primary">Rolü Güncelle</button>                                                
+                                                </div>
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                                      </div>
+
+                    }
+                </tbody>
+            </table>
+                            
+                        
+           
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        var table = $('#myTable').DataTable();
+
+        // Rol sütununa arama kutusu ekleyin
+        $('#roleFilter').on('change', function () {
+            table.columns(1).search(this.value).draw();
+        });
+    });
+</script>

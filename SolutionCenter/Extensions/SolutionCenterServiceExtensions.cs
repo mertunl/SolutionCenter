@@ -17,10 +17,11 @@ namespace SolutionCenter.Extensions
 			var roleManager = service.GetService<RoleManager<IdentityRole>>();
 			await roleManager.CreateAsync(new IdentityRole(Roles.Admin));
 			await roleManager.CreateAsync(new IdentityRole(Roles.User));
+            await roleManager.CreateAsync(new IdentityRole(Roles.SuperUser));
 
-			// creating admin
+            // creating admin
 
-			var user = new AppUser
+            var user = new AppUser
 			{
 				UserName = "admin@gmail.com",
 				Email = "admin@gmail.com",

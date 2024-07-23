@@ -14,6 +14,16 @@ namespace BusinessLayer.Concrete
 	{
 		private readonly IApplicationDAL _applicationDAL = applicationDAL;
 
+        public void ApproveApplicationForUser(string id)
+        {
+            var application = _applicationDAL.GetAll().FirstOrDefault(a => a.AppUserId == id);
+            if (application != null)
+            {
+                application.ApplicationStatus = ApplicationStatus.Approved;
+                _applicationDAL.Update(application);
+            }
+        }
+
         public List<Application> GetApprovedApplication()
         {
             return _applicationDAL.GetAll().Where(a => a.ApplicationStatus == ApplicationStatus.Approved).ToList();

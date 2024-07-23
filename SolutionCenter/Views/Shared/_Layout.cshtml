@@ -32,7 +32,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Ana Sayfa</a>
                         </li>
                         @{
-                            if (User.IsInRole(Roles.User))
+                            if (User.IsInRole(Roles.User) || User.IsInRole(Roles.SuperUser))
                             {
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="Post" asp-controller="Post" asp-action="Index">Sorular</a>

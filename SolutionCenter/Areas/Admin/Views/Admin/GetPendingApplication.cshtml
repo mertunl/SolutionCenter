@@ -19,7 +19,7 @@
                         <th scope="col">İşlem</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody> 
                     @foreach(var item in @ViewBag.PendingApplication){
                         count++;
                         <tr>
@@ -27,9 +27,9 @@
                         <td>@item.Name</td>
                         <td>@item.Surname</td>
                         <td>@item.Degree</td>
-                            <td><button type="button" class="btn-outline-success" data-bs-toggle="modal" data-bs-target="#reviewModal">İncele</button></td>
+                            <td><button type="button" class="btn-outline-success" data-bs-toggle="modal" data-bs-target="#modal-@item.ApplicationID">İncele</button></td>
                             <form method="post">
-                                <div id="reviewModal" class="modal fade" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                <div id="modal-@item.ApplicationID" class="modal fade" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -44,8 +44,31 @@
                                                 <p><b style="color:red">Mezun olunan bölüm:</b>  @item.Degree</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="submit" class="btn btn-danger" asp-area="Admin" asp-controller="Admin" asp-action="RejectApplication" asp-route-id="@item.ApplicationID">Reddet</button>
-                                                <button type="submit" class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="AcceptApplication" asp-route-id="@item.ApplicationID">Kabul Et</button>
+                                                @* <button type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Admin" asp-action="RejectApplication" asp-route-id="@item.ApplicationID">Reddet</button>*/ *@
+                                                @* <button type="submit" class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="AcceptApplication" asp-route-id="@item.ApplicationID">Kabul Et</button> *@
+                                                <button type="button" class="btn-outline-success" data-bs-toggle="modal" data-bs-target="#modal2-@item.ApplicationID">Reddet</button>
+                                                <div id="modal2-@item.ApplicationID" class="modal fade" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="reviewModalLabel">Reddetme Nedeni</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="mb-3">
+                                                                    <label for="rejectReason" class="form-label">Reddetme Nedeni</label>
+                                                                    <textarea class="form-control" id="rejectReason" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" asp-area="Admin" asp-controller="Admin" asp-action="RejectApplication" asp-route-id="@item.ApplicationID">Reddet</button>
+                                                               
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-success" asp-area="Admin" asp-controller="Admin" asp-action="AcceptUser" asp-route-id="@item.AppUserId">Kabul Et</button>
                                             </div>
                                         </div>
                                     </div>
