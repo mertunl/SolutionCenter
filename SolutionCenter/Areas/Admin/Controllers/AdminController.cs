@@ -42,6 +42,12 @@ namespace SolutionCenter.Areas.Admin.Controllers
             ViewBag.PendingApplication = GetApplication;
             return View();
         }
+        public IActionResult GetRejectedApplication()
+        {
+            var GetApplication = _applicationService.GetRejectedApplication();
+            ViewBag.RejectedApplication = GetApplication;
+            return View();
+        }
 
         public IActionResult GetAllStatus()
         {
@@ -57,9 +63,19 @@ namespace SolutionCenter.Areas.Admin.Controllers
 
         }
         [HttpPost]
-        public IActionResult RejectApplication(Guid id)
+        public IActionResult WithDrawApplication(Guid id)
         {
             var getApplication = _applicationService.TGetByID(id);
+            getApplication.ApplicationStatus = ApplicationStatus.Pending;
+            _applicationService.TUpdate(getApplication);
+            return RedirectToAction("GetRejectedApplication", "Admin", new { area = "Admin" });
+
+        }
+        [HttpPost]
+        public IActionResult RejectApplication(Guid id, string reasonRejection)
+        {
+            var getApplication = _applicationService.TGetByID(id);
+            getApplication.ReasonRejection = reasonRejection;
             getApplication.ApplicationStatus = ApplicationStatus.Rejected;
             _applicationService.TUpdate(getApplication);
             return RedirectToAction("GetPendingApplication", "Admin", new { area = "Admin" });

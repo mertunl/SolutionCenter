@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20240608110514_first")]
+    [Migration("20240802064940_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -133,6 +133,9 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReasonRejection")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")

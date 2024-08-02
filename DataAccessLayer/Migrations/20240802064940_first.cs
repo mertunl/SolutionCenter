@@ -98,6 +98,7 @@ namespace DataAccessLayer.Migrations
                     Experience = table.Column<int>(type: "int", nullable: true),
                     CV = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Degree = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReasonRejection = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ApplicationStatus = table.Column<int>(type: "int", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },

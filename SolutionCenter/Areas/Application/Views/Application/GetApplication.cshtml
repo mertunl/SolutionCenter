@@ -16,22 +16,43 @@
                     }
                     else if (item.ApplicationStatus == ApplicationStatus.Approved)
                     {
-                        <b style="color:cyan">@item.ApplicationStatus</b>
+                        <b style="color:green">@item.ApplicationStatus</b>
                     }
                     else if (item.ApplicationStatus == ApplicationStatus.Rejected)
                     {
-                        <b style="color:green">@item.ApplicationStatus</b>
+                        <b style="color:red">@item.ApplicationStatus</b>
                     }
                     else
                     {
                         <h1>HATA!</h1>
                     }
                 </div>
+
                 <p class="card-text">İsim Soyisim: @item.Name @item.Surname</p>
                 <p class="card-text">Lisans: @item.Degree</p
                 <br />
                 <p class="card-text">Tecrübe Yılı: @item.Experience</p>
 
+                @if(item.ApplicationStatus == ApplicationStatus.Rejected)
+                {
+                     <div style="position: absolute; bottom: 0; right: 0;">
+                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-@item.ApplicationID">Reddedilme Nedeni</button>
+                         <div id="modal-@item.ApplicationID" class="modal fade" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="reviewModalLabel">Reddedilme Nedeni</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    @item.ReasonRejection
+                                                                     </div>
+                                                                 </div>
+                                                                  </div>
+
+                              </div>
+                             </div>
+                }
 
             </div>
         </div>

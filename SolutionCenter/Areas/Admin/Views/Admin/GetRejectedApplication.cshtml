@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+    int count = 0;
+}
+@model Application
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/SolutionCenter.styles.css" asp-append-version="true" />
+<div class="container-fluid">
+    <div class="row flex-nowrap">
+        @Html.Partial("_LeftBarMenu")
+        <div class="col py-3">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Lisans</th>
+                        <th scope="col">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @ViewBag.RejectedApplication)
+                    {
+                        count++;
+                        <tr>
+                            <th scope="row">@count</th>
+                            <td>@item.Name</td>
+                            <td>@item.Surname</td>
+                            <td>@item.Degree</td>
+
+                            <td>
+                                <form asp-area="Admin" asp-controller="Admin" asp-action="WithDrawApplication" method="post">
+                                    <input type="hidden" name="id" value="@item.ApplicationID" />
+                                    <button type="submit" class="btn btn-outline-success">Geri Al</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

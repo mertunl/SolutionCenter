@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SolutionCenter.Areas.Application.Controllers
 {
+    
     [Area("Application")]
     public class ApplicationController : Controller
     {
