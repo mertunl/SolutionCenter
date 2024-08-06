@@ -2,25 +2,43 @@
 using DataAccessLayer.DatabaseContext;
 using EntityLayer.Entites;
 using EntityLayer.Enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.Blazor;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SolutionCenter.Areas.Offer.Controllers
 {
+    [Area("Offer")]
     public class OfferController : Controller
     {
         private readonly IOfferService _offerService;
         private readonly Context _context;
-        public OfferController(IOfferService offerService,Context context)
+        private readonly UserManager<AppUser> _userManager;
+        public OfferController(IOfferService offerService,Context context, UserManager<AppUser> userManager)
         {
             _offerService = offerService;
             _context = context;
+            _userManager = userManager;
         }
         [HttpPost]
         public IActionResult CreateOffer(EntityLayer.Entites.Offer offer)
         {
-            return Created("Teklif gönderildi", _offerService.TAdd(offer));
-        } 
+            var userId = _userManager.GetUserId(User);
+            if (offer.Offeree == offer.AppUserId)
+            {
+                TempData["ErrorMessage"] = "Bu post sana ait olduğu için teklif yapamazsın";
+                return RedirectToAction("GetPost", "Post", new { area = "Post", id = offer.PostID });
+                
+            }
+            else
+            {
+                _offerService.TAdd(offer);
+            }
+            return RedirectToAction("GetPost", "Post", new { area = "Post", id = offer.PostID });
+
+        }
 
         public IActionResult GetOffer(Guid id)
         {

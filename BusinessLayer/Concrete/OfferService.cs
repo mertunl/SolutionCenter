@@ -55,9 +55,16 @@ namespace BusinessLayer.Concrete
 			 _offerDAL.Update(entity);
 		}
 
-        //public List<Offer> Update(Offer offer)
-        //{
-        //   return _offerDAL.Update(offer);
-        //}
-    }
+		public bool IsPostOwnedByUser(Guid postId, string userId)
+		{
+			var post = _postService.TGetListAll().FirstOrDefault(p => p.PostID == postId);
+			
+			return post != null && post.AppUserId == userId;
+		}
+
+		//public List<Offer> Update(Offer offer)
+		//{
+		//   return _offerDAL.Update(offer);
+		//}
+	}
 }

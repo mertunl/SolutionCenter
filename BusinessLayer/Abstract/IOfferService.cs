@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
 	{
 		List<Offer> GetOffer(Guid id);
 		//List<Offer>  Update(Offer offer);
+		bool IsPostOwnedByUser(Guid postId, string userId);
 	}
 }

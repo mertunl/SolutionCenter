@@ -8,6 +8,13 @@
 }
 
 <div class="container">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+    
     <div class="mb-3">
         <b class="text-danger">
             @ViewBag.post.Title
@@ -45,10 +52,12 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
+
                             <h5 class="modal-title" id="exampleModalLabel">Teklif Yap</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
+                            
                             <input type="hidden" value="@ViewBag.post.PostID" asp-for="PostID">
                             <input type="hidden" value="@UserManager.GetUserId(User)" asp-for="AppUserId">
                             <input type="number" class="form-control" asp-for="Price">

@@ -2,6 +2,7 @@
 using EntityLayer.Entites;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Blazor;
 
 namespace SolutionCenter.Areas.Application.Controllers
 {
@@ -32,8 +33,18 @@ namespace SolutionCenter.Areas.Application.Controllers
             application.Name = user.Name;
             application.Surname = user.Surname;
             application.AppUserId = userManager.GetUserId(User);
-            applicationService.TAdd(application);
-			return RedirectToAction("CreateApplication");
+
+            var existingApplication = applicationService.GetApplicationByUserId(application.AppUserId);
+            if (existingApplication== null)
+            {
+                applicationService.TAdd(application);
+            }
+            else if(existingApplication != null)
+            {
+                ModelState.AddModelError("", "Başvuru zaten yapılmış.");
+                return View(application);
+            }
+            return RedirectToAction("CreateApplication");
 		}
 
         public IActionResult GetApplication()

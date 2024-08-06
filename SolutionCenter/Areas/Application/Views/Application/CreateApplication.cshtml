@@ -8,6 +8,8 @@
 	<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 
 	<form method="post">
+		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
 		@* <div class="mb-3">
 			<label for="exampleFormControlInput1" class="form-label">İsim</label>
 			<input type="text" class="form-control" id="tittle" asp-for="Name">

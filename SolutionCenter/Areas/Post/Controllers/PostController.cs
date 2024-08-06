@@ -57,6 +57,10 @@ namespace SolutionCenter.Areas.Post.Controllers
        
         public IActionResult GetPost(Guid id)
         {
+            if (TempData["ErrorMessage"] != null)
+            {
+                ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+            }
             var post = postService.TGetByID(id);
             ViewBag.post = post;
             var userid = post.AppUserId;

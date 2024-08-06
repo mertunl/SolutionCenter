@@ -14,6 +14,7 @@ namespace BusinessLayer.Abstract
 		List<Application> GetPendingApplication();
         List<Application> GetApprovedApplication();
         List<Application> GetRejectedApplication();
+        Application GetApplicationByUserId(string id);
         void ApproveApplicationForUser(string id);
     }
 }

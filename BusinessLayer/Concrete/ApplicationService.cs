@@ -24,6 +24,11 @@ namespace BusinessLayer.Concrete
             }
         }
 
+        public Application GetApplicationByUserId(string id)
+        {
+            return _applicationDAL.GetAll().FirstOrDefault(a => a.AppUserId == id);
+        }
+
         public List<Application> GetApprovedApplication()
         {
             return _applicationDAL.GetAll().Where(a => a.ApplicationStatus == ApplicationStatus.Approved).ToList();
