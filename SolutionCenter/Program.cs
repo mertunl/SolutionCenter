@@ -9,18 +9,13 @@ using SolutionCenter.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
-//var connectionString = builder.Configuration.GetConnectionString("ContextConnection") ?? throw new InvalidOperationException("Connection string 'ContextConnection' not found.");
-
-//builder.Services.AddDbContext<Context>(options => options.UseSqlServer(connectionString));
-
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<Context>();
 
 builder.Services.AddControllers().AddNewtonsoftJson();
-//builder.Services.AddControllersWithViews().AddNewtonsoftJson();
 builder.Services.AddRazorPages();
 builder.Services.AddServiceServices();
 builder.Services.AddRepositoryServices(builder.Configuration);
 builder.Services.AddSolutionCenterServices();
+
 //builder.Services.AddControllers().AddNewtonsoftJson();
 var app = builder.Build();
 

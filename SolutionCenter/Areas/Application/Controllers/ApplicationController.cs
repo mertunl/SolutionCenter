@@ -29,6 +29,12 @@ namespace SolutionCenter.Areas.Application.Controllers
         [HttpPost]
 		public async Task<IActionResult> CreateApplication(EntityLayer.Entites.Application application)
 		{
+            if (!ModelState.IsValid)
+            {
+                // Model doğrulama hatalarını işleyin
+                return View(application);
+            }
+
             var user = await userManager.GetUserAsync(User);
             application.Name = user.Name;
             application.Surname = user.Surname;

@@ -10,26 +10,15 @@
 	<form method="post">
 		@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-		@* <div class="mb-3">
-			<label for="exampleFormControlInput1" class="form-label">İsim</label>
-			<input type="text" class="form-control" id="tittle" asp-for="Name">
-		</div>
-		<div class="mb-3">
-			<label for="exampleFormControlInput2" class="form-label">Soyisim</label>
-			<input type="text" class="form-control" id="tittle" asp-for="Surname">
-		</div> *@
-		@* <div class="mb-3">
-			<label for="exampleFormControlTextarea1" class="form-label">Lisans İsmi</label>
-			<input type="hidden" value="@UserManager.GetUserId(User)" asp-for="AppUserId">
-			<input type="text" class="form-control" id="tittle2" asp-for="Degree">
-		</div> *@
 		<div class="mb-3">
 			<label for="exampleFormControlTextarea1" class="form-label">Lisans İsmi</label>
 			<input type="text" class="form-control" id="tittle2" asp-for="Degree">
+			@Html.ValidationMessageFor(model => model.Degree, "", new { @class = "text-danger" })
 		</div>
 		<div class="mb-3">
 			<label for="exampleFormControlInput3" class="form-label">Tecrübe Yılı</label>
 			<input type="number" class="form-control" asp-for="Experience">
+			@Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
 		</div>
 		<div class="mb-3">
 			<label for="formFile" class="form-label">Default file input example</label>

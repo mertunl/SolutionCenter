@@ -16,16 +16,19 @@ namespace SolutionCenter.Areas.Offer.Controllers
         private readonly IOfferService _offerService;
         private readonly Context _context;
         private readonly UserManager<AppUser> _userManager;
-        public OfferController(IOfferService offerService,Context context, UserManager<AppUser> userManager)
+        private readonly IPostService _postService; 
+        public OfferController(IOfferService offerService,Context context, UserManager<AppUser> userManager, IPostService postService)
         {
             _offerService = offerService;
             _context = context;
             _userManager = userManager;
+            _postService = postService;
         }
         [HttpPost]
         public IActionResult CreateOffer(EntityLayer.Entites.Offer offer)
         {
             var userId = _userManager.GetUserId(User);
+            
             if (offer.Offeree == offer.AppUserId)
             {
                 TempData["ErrorMessage"] = "Bu post sana ait olduğu için teklif yapamazsın";
@@ -35,6 +38,9 @@ namespace SolutionCenter.Areas.Offer.Controllers
             else
             {
                 _offerService.TAdd(offer);
+                var post = _postService.TGetByID(offer.PostID);
+                post.postStatus = PostStatus.Offered;
+                _postService.TUpdate(post);
             }
             return RedirectToAction("GetPost", "Post", new { area = "Post", id = offer.PostID });
 
@@ -58,9 +64,11 @@ namespace SolutionCenter.Areas.Offer.Controllers
         public IActionResult AcceptOffer(Guid id/*,EntityLayer.Entites.Offer offer */)
         {
             var getOffer = _offerService.TGetByID(id);
-
             getOffer.OfferStatus = OfferStatus.Approved;
             _offerService.TUpdate(getOffer);
+            var post = _postService.TGetByID(getOffer.PostID);
+            post.postStatus = PostStatus.Approved;
+            _postService.TUpdate(post);
 
             var getAllOffer = _offerService.TGetListAll();
             foreach ( var offer in getAllOffer )

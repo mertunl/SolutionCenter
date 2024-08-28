@@ -5,9 +5,14 @@
 }
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-3 bg-white min-vh-100" style=" margin-top: 10%">
 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+        <li class="nav-item">
+            <a asp-area="User" asp-controller="User" asp-action="GetStat" class="nav-link align-middle px-0">
+                <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
+            </a>
+        </li>
     <li class="nav-item">
         <a asp-area="User" asp-controller="User" asp-action="GetStat" class="nav-link align-middle px-0">
-            <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">Profile</span>
+            <i class="fs-4 bi-person-fill"></i> <span class="ms-1 d-none d-sm-inline">İstatistikler</span>
         </a>
     </li>
     <li>

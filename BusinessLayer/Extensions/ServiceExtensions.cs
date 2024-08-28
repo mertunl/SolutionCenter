@@ -1,5 +1,7 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.Validator;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -19,7 +21,8 @@ namespace BusinessLayer.Extensions
 			services.AddScoped<ICategoryService, CategoryService>();
 			services.AddScoped<IUserService, UserService>();
 			services.AddScoped<IStatService, StatService>();
-
+			services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<ApplicationValidator>());
+			services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<PostValidator>());
 			
 			return services;
 		}

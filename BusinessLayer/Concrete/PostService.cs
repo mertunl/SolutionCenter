@@ -83,7 +83,7 @@ namespace BusinessLayer.Concrete
 
 		public void TUpdate(Post entity)
 		{
-			throw new NotImplementedException();
+			_postDAL.Update(entity);
 		}
 
 	}

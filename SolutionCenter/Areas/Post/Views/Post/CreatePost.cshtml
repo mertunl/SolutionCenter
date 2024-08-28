@@ -10,17 +10,20 @@
 <div class="mb-3">
 	<label for="exampleFormControlInput1" class="form-label">Konu Başlığı</label>
 	<input type="text" class="form-control" id="tittle" asp-for="Title">
+		@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
 </div>
 <div class="mb-3">
 	<label for="exampleFormControlTextarea1" class="form-label">Açıklama</label>
 		<input type="hidden" value="@UserManager.GetUserId(User)" asp-for="AppUserId">
 		
 	<input type="text" class="form-control" id="tittle2" asp-for="Content">
+		@Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
 </div>
 	<div class="input-group mb-3">
 		<span class="input-group-text">$</span>
 		<input type="text" class="form-control" asp-for="Price">
 		<span class="input-group-text">.00</span>
+		@Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
 	</div>
 <div class="mb-3">
 		<label class="form-check-label">Kategori</label>
@@ -31,6 +34,7 @@
 				<option value="@item.CategoryID">@item.Name</option>
 			}
 		</select>
+			@* @Html.ValidationMessageFor(model => model.Categories, "", new { @class = "text-danger" }) *@
 		</div>	
 </div>
 	<button class="btn btn-info">Yayınla</button>

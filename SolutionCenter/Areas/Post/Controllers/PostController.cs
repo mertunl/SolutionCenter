@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Hosting;
 using System.Security.Cryptography;
 using EntityLayer.Entites;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SolutionCenter.Areas.Post.Controllers
 {
@@ -50,6 +51,11 @@ namespace SolutionCenter.Areas.Post.Controllers
         [HttpPost]
         public IActionResult CreatePost(EntityLayer.Entites.Post post)
         {
+		
+			if (!ModelState.IsValid)
+            {
+                return View();
+            }
             var categoryIds = post.CategoryIDs;
             postService.Add(post, categoryIds);
             return RedirectToAction("CreatePost");

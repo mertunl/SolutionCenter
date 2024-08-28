@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="Areas\User\Views\User\GetProfile.cshtml" />
     <Content Remove="Views\User\GetPost.cshtml" />
     <Content Remove="Views\User\Register.cshtml" />
   </ItemGroup>
@@ -38,9 +39,14 @@
     <UpToDateCheckInput Remove="Views\User\GetPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Areas\User\Views\User\GetProfile.cshtml" />
     <_ContentIncludedByDefault Remove="Views\User\GetPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Areas\User\Views\User\GetPost.cshtml" />
+    <None Include="Areas\User\Views\User\GetProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Areas\User\Views\User\GetProfile.cshtml" />
   </ItemGroup>
 </Project>
